@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>DB Suite — L'Atelier Privé</title>
+  <link rel="apple-touch-icon" href="db-suite-icon.png">
+  <link rel="icon" type="image/png" href="db-suite-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #B4963C;
+      --gold-light: #C8AA50;
+      --bg: #111111;
+      --bg-card: #1A1A1A;
+      --bg-card-hover: #222222;
+      --text: #F5F0E8;
+      --text-muted: #888880;
+      --border: rgba(180,150,60,0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .logo-db {
+      font-size: clamp(72px, 12vw, 108px);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .logo-divider {
+      width: 120px;
+      height: 1px;
+      background: var(--gold);
+      margin: 16px auto;
+    }
+
+    .logo-suite {
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin-top: 20px;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── GRILLE APPS ── */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 60px;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card:hover, .app-card:active {
+      background: var(--bg-card-hover);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .app-card.coming-soon {
+      opacity: 0.45;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .app-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    .app-icon-placeholder {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: #2a2a2a;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--text-muted);
+    }
+
+    .app-name {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .app-desc {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .badge-soon {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 10px;
+    }
+
+    /* ── STATUS SUPABASE ── */
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #555;
+    }
+
+    .sync-dot.ok { background: #4caf50; }
+    .sync-dot.error { background: #e53935; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #444;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-db">DB</div>
+    <div class="logo-divider"></div>
+    <div class="logo-suite">Suite</div>
+    <div class="subtitle">L'Atelier Privé de David Boyer</div>
+  </header>
+
+  <div class="apps-grid">
+
+    <a class="app-card" href="https://boyeda-tech.github.io/db-carte/">
+      <img class="app-icon" src="https://boyeda-tech.github.io/db-carte/db-carte-icon.png" alt="DB Carte" onerror="this.style.display='none'">
+      <div class="app-name">Carte</div>
+      <div class="app-desc">Menus, plats, fiches MEP et descriptifs gastronomiques</div>
+    </a>
+
+    <a class="app-card" href="https://boyeda-tech.github.io/db-wine/">
+      <img class="app-icon" src="https://boyeda-tech.github.io/db-wine/db-wine-icon.png" alt="DB Wine" onerror="this.style.display='none'">
+      <div class="app-name">Wine</div>
+      <div class="app-desc">Carte des vins, accords mets-vins, gestion des stocks</div>
+    </a>
+
+    <a class="app-card coming-soon" href="#">
+      <div class="app-icon-placeholder">⊕</div>
+      <div class="app-name">Cash</div>
+      <div class="app-desc">Caisse ISCA, tickets, TVA, clôture de service</div>
+      <span class="badge-soon">Bientôt</span>
+    </a>
+
+  </div>
+
+  <div class="sync-status">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span id="sync-label">Vérification de la connexion…</span>
+  </div>
+
+  <footer>
+    <p>DB Suite · L'Atelier Privé · 2026</p>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://wtjjmwokiehfyakwbqtn.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0amptd29raWVoZnlha3dicXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MDc2MTIsImV4cCI6MjA5NTI4MzYxMn0.GHZI71WvEsUWtv6IVVLAsNW_NHeAHKNr0I1cHnrAtDI';
+
+    async function checkConnection() {
+      const dot   = document.getElementById('sync-dot');
+      const label = document.getElementById('sync-label');
+      try {
+        const r = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+          headers: { 'apikey': SUPABASE_KEY }
+        });
+        if (r.ok || r.status === 404) {
+          dot.classList.add('ok');
+          label.textContent = 'Connecté à DB Suite';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        dot.classList.add('error');
+        label.textContent = 'Hors ligne — données locales';
+      }
+    }
+
+    checkConnection();
+  </script>
+
+</body>
+</html>
